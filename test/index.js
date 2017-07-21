@@ -95,6 +95,12 @@ describe('less2sass', function() {
       assert.equal(result, 'adjust-hue(#aaaaaa, 10)');
     });
   });
+  describe("extend", function() {
+    it('converts &:extend syntax', function() {
+      const result = less2sass.convert('.bar {\n  &:extend(.foo2);\n}');
+      assert.equal(result, '.bar {\n  @extend .foo2;\n}');
+    });
+  });
 
   describe("mixins", function() {
     it('converts mixin declarations to use the @mixins syntax', function() {
@@ -105,6 +111,30 @@ describe('less2sass', function() {
     it('converts mixin declarations with new lines in param list and retains the new lines', function() {
       const result = less2sass.convert('.drop-shadow(\n @x-axis: 0,\n @y-axis: 1px,\n @blur: 2px,\n @alpha: 0.1) {\n}');
       assert.equal(result, '@mixin drop-shadow(\n $x-axis: 0,\n $y-axis: 1px,\n $blur: 2px,\n $alpha: 0.1) {\n}');
+    });
+
+    it('converts mixin declarations with semicolons in param list and treat them as params', function() {
+      // http://lesscss.org/features/#mixins-parametric-feature-mixins-with-multiple-parameters
+      // Semicolons separated params.
+      const result = less2sass.convert('.button-variant(@color; @background; @border) {\n    /**/\n}');
+      assert.equal(result, '@mixin button-variant($color, $background, $border) {\n    /**/\n}');
+    });
+
+    it('do not converts mixin declarations with semicolons and colons mixed in param list', function() {
+      // http://lesscss.org/features/#mixins-parametric-feature-mixins-with-multiple-parameters
+      const result = less2sass.convert('.name(1, 2, 3; something, else) {\n}');
+      // TODO Flag the case as ambiguous?
+      assert.equal(result, '.name(1, 2, 3; something, else) {\n}');
+    });
+
+    it('converts mixin declarations with mixin call inlined', function() {
+      const result = less2sass.convert('.setTapColor(@c:rgba(0,0,0,0)) {\n    -webkit-tap-highlight-color: @c;\n}');
+      assert.equal(result, '@mixin setTapColor($c:rgba(0,0,0,0)) {\n    -webkit-tap-highlight-color: $c;\n}');
+    });
+
+    it('converts mixin declarations with zero param', function() {
+      const result = less2sass.convert('.foo() {\n  display: block;\n}');
+      assert.equal(result, '@mixin foo() {\n  display: block;\n}');
     });
 
     it('converts mixin call without argments to use the @include syntax', function() {
