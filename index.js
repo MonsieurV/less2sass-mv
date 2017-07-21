@@ -14,7 +14,7 @@ Less2Sass.prototype.convert = function(file) {
       .convertMixins()
       .includeMixins()
       .convertExtend()
-      .convertColourHelpers()
+      .convertColorHelpers()
       .convertFileExtensions()
       .convertFunctionUnit();
 
@@ -23,7 +23,6 @@ Less2Sass.prototype.convert = function(file) {
 
 Less2Sass.prototype.includeMixins = function() {
   var includeRegex = /^(\s*)\.([a-zA-Z][\w\-]*\(?[^;{}]*\)?;{1}$)/gm;
-
   this.file = this.file.replace(includeRegex, '$1@include $2');
 
   return this;
@@ -39,6 +38,7 @@ Less2Sass.prototype.convertMixins = function() {
   this.file = this.file.replace(mixinRegexWithSemicolon, function (match, g1, g2, g3) {
     return g1 + '@mixin ' + g2 + '(' + g3.replace(/;/g, ',') + ') {';
   });
+
   return this;
 };
 
@@ -62,19 +62,16 @@ Less2Sass.prototype.convertExtend = function() {
   return this;
 };
 
-Less2Sass.prototype.convertColourHelpers = function() {
+Less2Sass.prototype.convertColorHelpers = function() {
   var helperRegex = /spin\(/g;
-
   this.file = this.file.replace(helperRegex, 'adjust-hue(');
-
-  // TODO (EK): Flag other colour helpers for manual conversion that SASS does not have
+  // TODO (EK): Flag other color helpers for manual conversion that SASS does not have
 
   return this;
 };
 
 Less2Sass.prototype.convertTildaStrings = function() {
   var tildaRegex = /~("|')/g;
-
   this.file = this.file.replace(tildaRegex, '$1');
 
   return this;
@@ -82,7 +79,6 @@ Less2Sass.prototype.convertTildaStrings = function() {
 
 Less2Sass.prototype.convertInterpolatedVariables = function() {
   var interpolationRegex = /@\{(?!(\s|\())/g;
-
   this.file = this.file.replace(interpolationRegex, '#{$');
 
   return this;
@@ -91,7 +87,6 @@ Less2Sass.prototype.convertInterpolatedVariables = function() {
 Less2Sass.prototype.convertVariables = function() {
   // Matches any @ that doesn't have 'media ' or 'import ' after it.
   var atRegex = /@(?!(media|import|mixin|font-face|keyframes)(\s|\())/g;
-
   this.file = this.file.replace(atRegex, '$');
 
   return this;
@@ -99,7 +94,6 @@ Less2Sass.prototype.convertVariables = function() {
 
 Less2Sass.prototype.convertFileExtensions = function() {
   var extensionRegex = /\.less/g;
-
   this.file = this.file.replace(extensionRegex, '.scss');
 
   return this;

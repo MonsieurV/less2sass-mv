@@ -89,7 +89,7 @@ describe('less2sass', function() {
     });
   });
 
-  describe("colour helpers", function() {
+  describe("color helpers", function() {
     it('converts spin function to adjust-hue', function() {
       const result = less2sass.convert('spin(#aaaaaa, 10)');
       assert.equal(result, 'adjust-hue(#aaaaaa, 10)');
