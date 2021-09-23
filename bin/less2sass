@@ -1,40 +1,44 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var path = require('path');
-var fs = require('fs');
-var less2sass = require('..');
-var mkdir = require('mkdirp').sync;
+const program = require("commander");
+const path = require("path");
+const fs = require("fs");
+const less2sass = require("..");
+const mkdir = require("mkdirp").sync;
 
 /**
  * Helpers.
  */
 
-function log(type, msg, color){
-  color = color || '36';
-  var w = 10;
-  var len = Math.max(0, w - type.length);
-  var pad = Array(len + 1).join(' ');
-  console.log('  \033[' + color + 'm%s\033[m : \033[90m%s\033[m', pad + type, msg);
+function log(type, msg, color) {
+  color = color || "36";
+  const w = 10;
+  const len = Math.max(0, w - type.length);
+  const pad = Array(len + 1).join(" ");
+  console.log(
+    "  \033[" + color + "m%s\033[m : \033[90m%s\033[m",
+    pad + type,
+    msg
+  );
 }
 
-function info(type, msg){
+function info(type, msg) {
   log(type, msg);
 }
 
-function warn(type, msg){
-  log(type, msg, '33');
+function warn(type, msg) {
+  log(type, msg, "33");
 }
 
-function error(type, msg){
-  log(type, msg, '31');
+function error(type, msg) {
+  log(type, msg, "31");
 }
 
 function write(path, str) {
   if (fs.existsSync(path)) {
-    warn('exists', path);
+    warn("exists", path);
   } else {
-    log('create', path, '32');
+    log("create", path, "32");
     fs.writeFileSync(path, str);
   }
 }
@@ -44,23 +48,26 @@ function isLessFile(filename) {
 }
 
 function convert(filePath, outDir = null, initialFilePath = null) {
-  info('processing', filePath);
+  info("processing", filePath);
 
-  var buffer = fs.readFileSync(filePath);
-  var output = less2sass.convert(buffer.toString());
-  var newPath = filePath;
+  const buffer = fs.readFileSync(filePath);
+  const output = less2sass.convert(buffer.toString());
+  const newPath = filePath;
 
   if (outDir && initialFilePath) {
-    var rootDir = process.cwd();
-    var fileDirectory = fs.statSync(initialFilePath).isDirectory() ?
-      initialFilePath :
-      path.dirname(initialFilePath);
-    var filePathRelative = path.relative(path.join(rootDir, fileDirectory), filePath);
+    const rootDir = process.cwd();
+    const fileDirectory = fs.statSync(initialFilePath).isDirectory()
+      ? initialFilePath
+      : path.dirname(initialFilePath);
+    const filePathRelative = path.relative(
+      path.join(rootDir, fileDirectory),
+      filePath
+    );
 
     newPath = path.join(rootDir, outDir, filePathRelative);
   }
 
-  newPath = newPath.replace(/\.less$/, '.scss');
+  newPath = newPath.replace(/\.less$/, ".scss");
 
   // make sure the new path directory exists in case it is nested
   mkdir(path.dirname(newPath));
@@ -73,9 +80,9 @@ function convert(filePath, outDir = null, initialFilePath = null) {
  */
 
 program
-  .option('-d, --directory <value>', 'Directory to output Scss files')
-  .version(require('../package.json').version)
-  .usage('[options] <less file or directory>');
+  .option("-d, --directory <value>", "Directory to output Scss files")
+  .version(require("../package.json").version)
+  .usage("[options] <less file or directory>");
 
 /**
  * Parse.
@@ -84,27 +91,26 @@ program.parse(process.argv);
 
 // args void of file path
 
-var args = process.argv.slice(3);
+const args = process.argv.slice(3);
 
 // command
 if (program.args[0] === undefined) {
-  error('fail', 'You must provide a file path');
+  error("fail", "You must provide a file path");
 
   program.help();
 }
 
 function read(filePath, outDir, initialFilePath) {
-  var fullPath = path.resolve(process.cwd(), filePath);
-  var stats = fs.statSync(fullPath);
-  info('scanning', fullPath);
-  
+  const fullPath = path.resolve(process.cwd(), filePath);
+  const stats = fs.statSync(fullPath);
+  info("scanning", fullPath);
+
   if (isLessFile(fullPath)) {
     convert(fullPath, outDir, initialFilePath);
-  }
-  else if (stats.isDirectory()){
-    var files = fs.readdirSync(fullPath);
+  } else if (stats.isDirectory()) {
+    const files = fs.readdirSync(fullPath);
 
-    for (var i = 0; i < files.length; i++) {
+    for (const i = 0; i < files.length; i++) {
       read(path.join(fullPath, files[i]), outDir, initialFilePath);
     }
   }

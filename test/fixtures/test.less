@@ -1,11 +1,10 @@
-@import 'base';
-@import 'app/app.less';
-
+@import "base";
+@import "app/app.less";
 
 // variables
 @black: #000;
 @san-serif-stack: helvetica, arial;
-@standard-fonts: ~'@{san-serif-stack}, sans-serif';
+@standard-fonts: ~"@{san-serif-stack}, sans-serif";
 
 // mixins
 .box-sizing (@sizing:border-box) {
@@ -32,15 +31,15 @@
   box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
 }
 
-  .drop-shadow-3(
+.drop-shadow-3(
     @x-axis: 0,
     @y-axis: 1px,
     @blur: 2px,
     @alpha: 0.1) {
-    -webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
-    -moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
-    box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
-  }
+  -webkit-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+  -moz-box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+  box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
+}
 
 #drop {
   .shadow-3(
@@ -57,12 +56,12 @@
 // styles
 
 @keyframes grow-font-size {
-    0% {
-        font-size: .5em;
-    }
-    100% {
-        font-size: 1em;
-    }
+  0% {
+    font-size: 0.5em;
+  }
+  100% {
+    font-size: 1em;
+  }
 }
 
 #header {

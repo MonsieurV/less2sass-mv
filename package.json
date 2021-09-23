@@ -21,7 +21,8 @@
   },
   "main": "index.js",
   "devDependencies": {
-    "mocha": "^9.1.1"
+    "mocha": "^9.1.1",
+    "prettier": "^2.4.1"
   },
   "scripts": {
     "publish": "git push origin && git push origin --tags",
@@ -29,7 +30,8 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "mocha": "mocha --reporter spec",
-    "test": "npm run mocha"
+    "test": "npm run mocha",
+    "format": "prettier --write . bin/less2sass"
   },
   "dependencies": {
     "commander": "^8.2.0",

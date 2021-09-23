@@ -1,5 +1,4 @@
-less2sass-mv
-=========
+# less2sass-mv
 
 This is a fork from [ekryski/less2sass](https://github.com/ekryski/less2sass).
 
@@ -35,9 +34,9 @@ console.log(scss);
 
 ## Caveats
 
-* This does not really convert color functions, it makes a best attempt but most color functions will need to be ported over manually
-* It does not convert to proper `.sass` yet. Only to `.scss`. (But you can use [sass-convert](http://sass-lang.com/documentation/#sass-convert) to then convert to `.sass`)
-* It may be buggy so you have to check your code but hopefully this script will save you some time. If you come across a bug, please create [an issue](https://github.com/MonsieurV/less2sass/issues). Better yet, a pull request!
+- This does not really convert color functions, it makes a best attempt but most color functions will need to be ported over manually
+- It does not convert to proper `.sass` yet. Only to `.scss`. (But you can use [sass-convert](http://sass-lang.com/documentation/#sass-convert) to then convert to `.sass`)
+- It may be buggy so you have to check your code but hopefully this script will save you some time. If you come across a bug, please create [an issue](https://github.com/MonsieurV/less2sass/issues). Better yet, a pull request!
 
 ## Contributing
 
