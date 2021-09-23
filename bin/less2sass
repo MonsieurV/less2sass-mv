@@ -52,7 +52,7 @@ function convert(filePath, outDir = null, initialFilePath = null) {
 
   const buffer = fs.readFileSync(filePath);
   const output = less2sass.convert(buffer.toString());
-  const newPath = filePath;
+  let newPath = filePath;
 
   if (outDir && initialFilePath) {
     const rootDir = process.cwd();
@@ -110,7 +110,7 @@ function read(filePath, outDir, initialFilePath) {
   } else if (stats.isDirectory()) {
     const files = fs.readdirSync(fullPath);
 
-    for (const i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       read(path.join(fullPath, files[i]), outDir, initialFilePath);
     }
   }
