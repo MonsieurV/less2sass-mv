@@ -1,16 +1,16 @@
 {
-  "name": "less2sass",
+  "name": "less2sass-mv",
   "description": "A quick less to sass converter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "author": {
-    "name": "Eric Kryski",
-    "email": "e.kryski@gmail.com"
+    "name": "Yoan Tournade",
+    "email": "y@yoantournade.com"
   },
-  "homepage": "http://erickryski.com",
+  "homepage": "https://github.com/MonsieurV/less2sass",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ekryski/less2sass.git"
+    "url": "git@github.com:MonsieurV/less2sass.git"
   },
   "engines": {
     "node": ">=0.10.x",
