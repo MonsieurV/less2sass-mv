@@ -220,6 +220,13 @@ describe("less2sass", function () {
         assert.equal(result, "0px + $size");
       });
     });
+    describe("fade", function () {
+      // https://lesscss.org/functions/#color-operations-fade
+      it("convert two param call of less fade to Scss rgba", function () {
+        const result = less2sass.convert("fade($color, 75%)");
+        assert.equal(result, "rgba($color, 0.75)");
+      });
+    });
   });
 
   describe("control flow", function () {

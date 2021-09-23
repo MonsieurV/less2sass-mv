@@ -13,7 +13,8 @@ Less2Sass.prototype.convert = function (file) {
     .convertExtend()
     .convertColorHelpers()
     .convertFileExtensions()
-    .convertFunctionUnit();
+    .convertFunctionUnit()
+    .convertFunctionFade();
 
   return this.file;
 };
@@ -50,6 +51,20 @@ Less2Sass.prototype.convertFunctionUnit = function () {
   // One-arg.
   const unitOneArgRegex = /unit\(([^,]+)\)/g;
   this.file = this.file.replace(unitOneArgRegex, "unit-less($1)");
+
+  return this;
+};
+
+Less2Sass.prototype.convertFunctionFade = function () {
+  // Two-args.
+  const fadeRegex = /fade\((\S+),\s?(\S+)\)/g;
+  this.file = this.file.replace(fadeRegex, function (match, p1, p2) {
+    const percent = parseFloat(p2);
+    if (isNaN(percent)) {
+      throw new Error(`Expected a percentage as second arg of fade: ${match}`);
+    }
+    return `rgba(${p1}, ${percent / 100})`;
+  });
 
   return this;
 };
