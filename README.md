@@ -19,6 +19,16 @@ You can run less2sass on a single file or on entire directory. It will recurse t
 
 `less2sass-mv <path_to_less_file_or_directory>`
 
+## Node API
+
+```
+const less2sass = require('less2sass');
+
+const scss = less2sass.convert('@myColor: #f938ab; .myClass { color: @myColor; }');
+console.log(scss);
+// scss -> $myColor: #f938ab; .myClass { color: $myColor; }'
+```
+
 ## Caveats
 
 * This does not really convert color functions, it makes a best attempt but most color functions will need to be ported over manually
