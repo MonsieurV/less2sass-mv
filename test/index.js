@@ -88,6 +88,16 @@ describe("less2sass", function () {
       const result = less2sass.convert("@keyframes {}");
       assert.equal(result, "@keyframes {}");
     });
+
+    it("converts interpolated variables in calc", function () {
+      const result = less2sass.convert(
+        "width: calc(@layout-width - (2 * @layout-padding));"
+      );
+      assert.equal(
+        result,
+        "width: calc(#{$layout-width} - (2 * #{$layout-padding}));"
+      );
+    });
   });
 
   describe("~ strings", function () {

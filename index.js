@@ -7,6 +7,7 @@ Less2Sass.prototype.convert = function (file) {
 
   this.convertInterpolatedVariables()
     .convertVariables()
+    .convertVariablesInCssFunction()
     .convertTildaStrings()
     .convertMixins()
     .includeMixins()
@@ -104,6 +105,17 @@ Less2Sass.prototype.convertVariables = function () {
   // Matches any @ that doesn't have 'media ' or 'import ' after it.
   var atRegex = /@(?!(media|import|mixin|font-face|keyframes)(\s|\())/g;
   this.file = this.file.replace(atRegex, "$");
+
+  return this;
+};
+
+Less2Sass.prototype.convertVariablesInCssFunction = function () {
+  // Matches any $ in function.
+  const dollarInFunctionRegex = /(calc)\(.*\$.*\)/g;
+  const dollarRegex = /\$([a-zA-Z-_0-9]+)/g;
+  this.file = this.file.replace(dollarInFunctionRegex, function (match, p1) {
+    return match.replace(dollarRegex, "#{$$$1}");
+  });
 
   return this;
 };
