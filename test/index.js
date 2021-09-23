@@ -34,6 +34,11 @@ describe("less2sass", function () {
       );
     });
 
+    it("converts interpolated variables to #{$", function () {
+      const result = less2sass.convert("@{var_name};");
+      assert.equal(result, "#{$var_name};");
+    });
+
     it("converts @ for variables to $", function () {
       const result = less2sass.convert("@var1: #000;");
       assert.equal(result, "$var1: #000;");
