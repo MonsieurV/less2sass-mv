@@ -17,7 +17,11 @@ A little script to convert less to Sass files.
 
 You can run less2sass on a single file or on entire directory. It will recurse through the directory and convert any less files to Scss, preserving the directory structure.
 
-`less2sass-mv <path_to_less_file_or_directory>`
+`less2sass-mv <path_to_less_file_or_directory> [options]`
+
+### Options
+
+`-d, --directory`: A directory to which output transformed files.
 
 ## Node API
 

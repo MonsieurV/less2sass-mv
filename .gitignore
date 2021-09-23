@@ -56,3 +56,5 @@ Session.vim
 .lock-wscript
 
 lib/
+
+test_local*
