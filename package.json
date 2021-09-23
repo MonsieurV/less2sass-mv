@@ -1,7 +1,7 @@
 {
   "name": "less2sass-mv",
   "description": "A quick less to sass converter",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "license": "MIT",
   "author": {
     "name": "Yoan Tournade",
