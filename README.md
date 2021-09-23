@@ -22,3 +22,19 @@ You can run less2sass on a single file or on entire directory. It will recurse t
 * This does not really convert color functions, it makes a best attempt but most color functions will need to be ported over manually
 * It does not convert to proper `.sass` yet. Only to `.scss`. (But you can use [sass-convert](http://sass-lang.com/documentation/#sass-convert) to then convert to `.sass`)
 * It may be buggy so you have to check your code but hopefully this script will save you some time. If you come across a bug, please create [an issue](https://github.com/ekryski/less2sass/issues). Better yet, a pull request!
+
+## Contributing
+
+### Development
+
+Install dependencies:
+
+```sh
+npm install
+```
+
+First write tests in [`test`](/test), then make your changes and check them:
+
+```sh
+npm test
+```

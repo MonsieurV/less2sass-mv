@@ -13,15 +13,15 @@
     "url": "git@github.com:ekryski/less2sass.git"
   },
   "engines": {
-    "node": "=0.10.x",
-    "npm": "=1.2.x"
+    "node": ">=0.10.x",
+    "npm": ">=1.2.x"
   },
   "bin": {
     "less2sass": "bin/less2sass"
   },
   "main": "index.js",
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "mocha": "^9.1.1"
   },
   "scripts": {
     "publish": "git push origin && git push origin --tags",
@@ -32,8 +32,8 @@
     "test": "npm run mocha"
   },
   "dependencies": {
-    "commander": "^2.9.0",
-    "mkdirp": "^0.5.1",
+    "commander": "^8.2.0",
+    "mkdirp": "^1.0.4",
     "win-fork": "^1.1.1"
   }
 }
