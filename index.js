@@ -82,7 +82,8 @@ Less2Sass.prototype.convertExtend = function () {
 Less2Sass.prototype.convertColorHelpers = function () {
   var helperRegex = /spin\(/g;
   this.file = this.file.replace(helperRegex, "adjust-hue(");
-  // TODO (EK): Flag other color helpers for manual conversion that SASS does not have
+  // TODO (EK): Flag other color helpers for manual conversion
+  // that SASS does not have
 
   return this;
 };
