@@ -2,7 +2,7 @@
 
 This is a fork from [ekryski/less2sass](https://github.com/ekryski/less2sass).
 
-[![Build Status](https://travis-ci.com/MonsieurV/less2sass.svg?branch=master)](https://travis-ci.com/MonsieurV/less2sass)
+[![Build Status](https://travis-ci.com/MonsieurV/less2sass-mv.svg?branch=master)](https://travis-ci.com/github/MonsieurV/less2sass-mv)
 
 A little script to convert less to Sass files.
 
